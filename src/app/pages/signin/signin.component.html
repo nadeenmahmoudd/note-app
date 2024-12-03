@@ -1,0 +1,52 @@
+<section class="sign-in d-flex align-items-center vh-100">
+    <div class="container boxShadow">
+        <div class="signin-content row">
+            <div class="signin-image d-flex justify-content-center col-md-6">
+                <figure><img src="assets/images/signin-image.jpg" alt="sing in image" /></figure>
+            </div>
+            <div class="signin-form col-md-6">
+                <h2 class="form-title">Sign in</h2>
+                <form [formGroup]="signInForm" (ngSubmit)="handleLogin(signInForm)" class="register-form mt-4" id="login-form">
+                    <div class="form-group d-flex align-items-center mb-4">
+                        <label for="email">
+                            <span class="fa-solid fa-envelope"></span>
+                        </label>
+                        <input formControlName="email" type="email" name="email" id="email" placeholder="Your Email" />
+                    </div>
+                    <p class="alert alert-danger" *ngIf="signInForm.get('email')?.errors && signInForm.get('email')?.touched">
+                        <span *ngIf="signInForm.get('email')?.getError('required')">Required</span>
+                       </p>
+                    <div class="form-group d-flex align-items-center mb-4">
+                        <label for="password">
+                            <span class="fa-solid fa-lock"></span>
+                        </label>
+                        <input formControlName="password" type="password" name="password" id="password" placeholder="Password" />
+                    </div>
+                    <p class="alert alert-danger" *ngIf="signInForm.get('password')?.errors && signInForm.get('password')?.touched">
+                        <span *ngIf="signInForm.get('password')?.getError('required')">Required</span>
+                       </p>
+                    <div class="alert alert-danger" *ngIf="apiError">
+                        {{apiError}}
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-danger" [disabled]="signInForm.invalid">
+                            <i *ngIf="isLoading" class="fa fa-spinner fa-spin"></i>
+                            <span *ngIf="!isLoading">Sign In</span>
+                        </button>
+                    </div>
+                </form>
+                <div class="social-login d-flex justify-content-center flex-column align-items-center mt-4">
+                    <span class="social-label mb-3 fs-5">login with</span>
+                    <ul class="socials d-flex justify-content-evenly gap-3 list-unstyled">
+                        <li class=""><i class="fa-brands fa-facebook facebookIcon"></i></li>
+                        <li><i class="fa-brands fa-twitter twitterIcon"></i></li>
+                        <li><i class="fa-brands fa-google-plus-g googleIcon"></i></li>
+                    </ul>
+                    <p>Don't Have an account? 
+                        <a class="text-info" routerLink="/signUp">Signup</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
